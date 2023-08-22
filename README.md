@@ -5,14 +5,18 @@
 
 1. Deploy the files to their location, set the correct permissions and deploy config.
 
-2. Update or add the correct Ticket Type to be filter at Admin > Ticket::Frontend::AgentTicketStatusView###ViewBy::Type
+2. Update the correct Ticket Type to be filter at Admin > Ticket::Frontend::AgentTicketStatusView###ViewBy::Type
 
-	Default:
+	Example
 	
-		1 => Unclassified
+		1 => Problem
+		2 => Incident
 		
 		*where 1 = order of the field,
-		*where Unclassified = ticket type name,
+		*where Problem = ticket type name,
+		
+		*where 2 = order of the field,
+		*where Incident = ticket type name,
 
 3. Additional code has been tagged with
 

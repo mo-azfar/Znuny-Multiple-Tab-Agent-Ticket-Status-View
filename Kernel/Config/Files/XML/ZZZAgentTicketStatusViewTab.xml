@@ -5,7 +5,7 @@
         <Navigation>Frontend::Agent::View::TicketStatus</Navigation>
         <Value>
             <Hash>
-                <Item Key="1" Translatable="1">Unclassified</Item>
+                
             </Hash>
         </Value>
     </Setting>

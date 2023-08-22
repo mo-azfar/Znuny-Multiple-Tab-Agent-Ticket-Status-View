@@ -171,7 +171,7 @@ sub Run {
 	my @AdditionalFilter;
 	foreach my $FilterTypeKey ( keys %{$Config->{'ViewBy::Type'}} )
 	{
-		my $Prio = $FilterTypeKey + 1 + 1000;
+		my $Prio = $FilterTypeKey + 1000;
 		
 		push @AdditionalFilter, 
 		$Config->{'ViewBy::Type'}{$FilterTypeKey} => {
@@ -188,8 +188,12 @@ sub Run {
         },
 		
 	}
-	# --
 	
+	my @FilterCount = keys %{$Config->{'ViewBy::Type'}};
+	my $LastPrio = scalar @FilterCount || 0;
+	$LastPrio = $LastPrio + 1 + 1000;
+	# --
+
     # define filter
     my %Filters = (
         Open => {
@@ -203,9 +207,27 @@ sub Run {
                 Permission => 'ro',
             },
         },
-        Closed => {
+        
+		# --
+		# Agent Ticket Status View by Ticket Type Tab
+		# --
+		@AdditionalFilter,
+		
+		# Closed => {
+        #     Name   => Translatable('Closed tickets'),
+        #     Prio   => 1001,
+        #     Search => {
+        #         StateType  => 'Closed',
+        #         OrderBy    => $OrderBy,
+        #         SortBy     => $SortBy,
+        #         UserID     => $Self->{UserID},
+        #         Permission => 'ro',
+        #     },
+        # },
+				
+		Closed => {
             Name   => Translatable('Closed tickets'),
-            Prio   => 1001,
+            Prio   => $LastPrio,
             Search => {
                 StateType  => 'Closed',
                 OrderBy    => $OrderBy,
@@ -214,11 +236,6 @@ sub Run {
                 Permission => 'ro',
             },
         },
-		
-		# --
-		# Agent Ticket Status View by Ticket Type Tab
-		# --
-		@AdditionalFilter,
 		# --
     );
 

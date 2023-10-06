@@ -167,20 +167,53 @@ sub Run {
     $Output .= $LayoutObject->NotifyNonUpdatedTickets() // '';
 
 	# --
-	# Agent Ticket Status View by Ticket Type Tab
+	# Agent Ticket Status View Tab
 	# --
 	my @AdditionalFilter;
-	foreach my $FilterTypeKey ( keys %{$Config->{'ViewBy::Type'}} )
+	
+	#this will return Priorities or Types
+	#for ticket search attributes
+	my $AdditionalFilterName = $Config->{'ViewBy::TypePriority'}->{Attribute};
+	
+	my $PriorityObject = $Kernel::OM->Get('Kernel::System::Priority');
+	my $TypeObject = $Kernel::OM->Get('Kernel::System::Type');
+	my $Counter = 0;
+	
+	foreach my $FilterTypeKey ( keys %{$Config->{'ViewBy::TypePriority'}->{AttributeValue}} )
 	{
+		$Counter++;
+		
+		#verify filter value
+		if ( $AdditionalFilterName eq 'Priorities' )
+		{
+			my $PriorityID = $PriorityObject->PriorityLookup(
+				Priority => $Config->{'ViewBy::TypePriority'}->{AttributeValue}->{$FilterTypeKey},
+			);	
+			
+			next if !$PriorityID;
+			
+		}
+		
+		#verify filter value
+		if ( $AdditionalFilterName eq 'Types' )
+		{
+			my $TypeID = $TypeObject->TypeLookup( 
+				Type => $Config->{'ViewBy::TypePriority'}->{AttributeValue}->{$FilterTypeKey},
+			);	
+			
+			next if !$TypeID;
+			
+		}
+	
 		my $Prio = $FilterTypeKey + 1000;
 		
 		push @AdditionalFilter, 
-		$Config->{'ViewBy::Type'}{$FilterTypeKey} => {
-            Name   => Translatable("$Config->{'ViewBy::Type'}{$FilterTypeKey}"),
+		$Config->{'ViewBy::TypePriority'}->{AttributeValue}->{$FilterTypeKey} => {
+            Name   => Translatable("$Config->{'ViewBy::TypePriority'}->{AttributeValue}->{$FilterTypeKey}"),
             Prio   => $Prio,
             Search => {
                 StateType  => 'Open',
-				Types      => [ $Config->{'ViewBy::Type'}{$FilterTypeKey} ],
+				$AdditionalFilterName  => [ $Config->{'ViewBy::TypePriority'}->{AttributeValue}->{$FilterTypeKey} ],
                 OrderBy    => $OrderBy,
                 SortBy     => $SortBy,
                 UserID     => $Self->{UserID},
@@ -190,9 +223,7 @@ sub Run {
 		
 	}
 	
-	my @FilterCount = keys %{$Config->{'ViewBy::Type'}};
-	my $LastPrio = scalar @FilterCount || 0;
-	$LastPrio = $LastPrio + 1 + 1000;
+	my $LastPrio = $Counter + 1 + 1000;
 	# --
 
     # define filter
@@ -210,7 +241,7 @@ sub Run {
         },
         
 		# --
-		# Agent Ticket Status View by Ticket Type Tab
+		# Agent Ticket Status View Tab
 		# --
 		@AdditionalFilter,
 		

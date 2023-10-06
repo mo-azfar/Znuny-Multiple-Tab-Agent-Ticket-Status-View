@@ -1,27 +1,51 @@
 # Znuny Multiple Tab Agent Ticket Status View 
-- display multiple tab of agent ticket status filtered by ticket type (opens ticket).
-- based file Znuny 7.0.10
+- display multiple tab of agent ticket status (opens ticket) filtered by ticket priority / ticket type.
+- based file Znuny 7.0.11
 - you may later need to update / patch it based on latest release of znuny (refer no 3).
 
-1. Deploy the files to their location, set the correct permissions and deploy config.
 
-2. Update the correct Ticket Type to be filter at Admin > Ticket::Frontend::AgentTicketStatusView###ViewBy::Type
+1. Go to Admin > Ticket::Frontend::AgentTicketStatusView###ViewBy::TypePriority
 
-	Example
+	a) Select Attribute to be filter (Ticket Priority / Ticket Type)
 	
-		1 => Problem
-		2 => Incident
+	b) Define value for the selected attribute.
+	
+		Example 1
+		=========
+	
+		Attribute => Ticket Priority
+		
+		AttributeValue
+	
+			1 => 1 very low
+			2 => 2 low
+			3 => 3 normal
+			4 => 4 high
+			5 => 5 very high
 		
 		*where 1 = order of the field,
-		*where Problem = ticket type name,
+		*where 1 very low = ticket priority name,
 		
-		*where 2 = order of the field,
+		
+		Example 2
+		=========
+	
+		Attribute => Ticket Type
+		
+		AttributeValue
+	
+			1 => Incident
+			2 => Problem
+			3 => Unclassified
+		
+		*where 1 = order of the field,
 		*where Incident = ticket type name,
+
 
 3. Additional code has been tagged with
 
 		# --
-		# Agent Ticket Status View by Ticket Type Tab
+		# Agent Ticket Status View Tab
 		# --
 		CODE CODE CODE
 		# --

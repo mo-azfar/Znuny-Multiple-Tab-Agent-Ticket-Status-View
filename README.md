@@ -4,18 +4,21 @@
 - you may later need to update / patch it based on latest release of znuny (refer no 3).
 
 
-1. Go to Admin > Ticket::Frontend::AgentTicketStatusView###ViewBy::TypePriority
+1. Go to Admin > System Configuration > Ticket::Frontend::AgentTicketStatusView###ViewBy::FilterType
 
-	a) Select Attribute to be filter (Ticket Priority / Ticket Type)
+	a) Select Filter Type. Default is Ticket State Name.
 	
-	b) Define value for the selected attribute.
+	
+2. Go to Admin >  System Configuration > Ticket::Frontend::AgentTicketStatusView###ViewBy::FilterAttributes
+	
+	b) Define value for the selected ViewBy::FilterType.
 	
 		Example 1
 		=========
 	
-		Attribute => Ticket Priority
+		ViewBy::FilterType => Ticket Priority
 		
-		AttributeValue
+		ViewBy::FilterAttributes
 	
 			1 => 1 very low
 			2 => 2 low
@@ -30,9 +33,9 @@
 		Example 2
 		=========
 	
-		Attribute => Ticket Type
+		ViewBy::FilterType => Ticket Type
 		
-		AttributeValue
+		ViewBy::FilterAttributes
 	
 			1 => Incident
 			2 => Problem
@@ -51,6 +54,6 @@
 		# --
 		
 	
-![ticket-status-setting](status_view_config.png)
+![ticket-status-setting](doc/en/images/status_view_config.png)
 
-![ticket-status-screen](status_view_screen.png)
+![ticket-status-screen](doc/en/images/status_view_screen.png)

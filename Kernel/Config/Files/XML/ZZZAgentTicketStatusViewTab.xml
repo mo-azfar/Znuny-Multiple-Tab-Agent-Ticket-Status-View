@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <otrs_config version="2.0" init="Config">
-	<Setting Name="Ticket::Frontend::AgentTicketStatusView###ViewBy::TypePriority" Required="1" Valid="1">
-        <Description Translatable="1">Defines the ticket priority or ticket type attribute for ticket tab in the status view of the agent interface.</Description>
+    <Setting Name="Ticket::Frontend::AgentTicketStatusView###ViewBy::FilterType" Required="1" Valid="1">
+        <Description Translatable="1">Defines the filter type for ticket tab in the status view of the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketStatus</Navigation>
         <Value>
-			<Hash>
-				<Item Key="Attribute" ValueType="Select" SelectedID="Priorities">
-					<Item ValueType="Option" Value="Priorities" Translatable="1">Ticket Priority</Item>
-					<Item ValueType="Option" Value="Types" Translatable="1">Ticket Type</Item>
-				</Item>
-				<Item Key="AttributeValue">
-					<Hash>
-					</Hash>
-				</Item>
-			</Hash>
+            <Item ValueType="Select" SelectedID="States">
+                <Item ValueType="Option" Value="Priorities" Translatable="1">Ticket Priority</Item>
+                <Item ValueType="Option" Value="States" Translatable="1">Ticket State Name</Item>
+                <Item ValueType="Option" Value="Types" Translatable="1">Ticket Type</Item>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketStatusView###ViewBy::FilterAttributes" Required="1" Valid="1">
+        <Description Translatable="1">Defines the attributes (based on ViewBy::FilterType) for ticket tab in the status view of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketStatus</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="1">new</Item>
+                <Item Key="2">open</Item>
+                <Item Key="3">pending reminder</Item>
+                <Item Key="4">pending auto close+</Item>
+                <Item Key="5">pending auto close-</Item>
+            </Hash>
         </Value>
     </Setting>
  </otrs_config>

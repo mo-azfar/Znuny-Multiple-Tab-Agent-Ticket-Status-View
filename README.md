@@ -1,6 +1,6 @@
 # Znuny Multiple Tab Agent Ticket Status View 
-- display multiple tab of agent ticket status (opens ticket) filtered by ticket priority / ticket type.
-- based file Znuny 7.0.11
+- display multiple tab of agent ticket status (opens ticket) filtered by ticket priority / ticket type / ticket state name.
+- based file Znuny 7.0.16
 - you may later need to update / patch it based on latest release of znuny (refer no 3).
 
 
@@ -47,11 +47,11 @@
 
 3. Additional code has been tagged with
 
-		# --
+		# ---
 		# Agent Ticket Status View Tab
-		# --
+		# ---
 		CODE CODE CODE
-		# --
+		# ---
 		
 	
 ![ticket-status-setting](doc/en/images/status_view_config.png)
